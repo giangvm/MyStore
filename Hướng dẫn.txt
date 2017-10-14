@@ -1,0 +1,371 @@
+
+NHẬP
+1. Quyết định nhập                                              QD_NHAP_XUAT
+2. Quyết định giá nhập											QD_GIA_MASTER
+3. Quyết định phê duyệt kế hoạch đấu thầu						QD_DAUTHAU_MS(QD_DAUTHAU_MS_ID == null), QD_DAUTHAU_DT 
+4. Quyết định điều chỉnh kế hoạch đấu thầu(giá gói thầu)		QD_DAUTHAU_MS(QD_DAUTHAU_MS_ID != null), QD_DAUTHAU_DT. Sử dụng ID làm cha
+5. Thông tin đấu thầu											DAU_THAU_MASTER, DAU_THAU_DETAIL(Gồm quyết định đầu tư, quyết định phê duyệt)
+6. Hợp đồng mua													HOP_DONG (DAU_THAU_DETAIL_ID, nhap hay xuat)
+7. Quyết định giá nhập cụ thể									QD_GIA_CUTHE_MS(QUYET_DINH_NHAP_XUAT_ID, QD_GIA_MASTER_ID)
+8. Lệnh nhập													LENH_NX_MASTER(LOAI_HINH_NHAP_XUAT_ID, NHAP_HAY_XUAT, QD_NHAP_XUAT_ID, CTKH_NAM_ID, LENH_MS_ID, DAU_THAU_DETAIL_ID, QD_PHEDUYET_KQ_DAUTHAU), LENH_NX_DETAIL ()
+9. Biên bản nghiệm thu kê lót và sát trùng kho nhập thóc
+10. Biên bản nghiệm thu kê lót lô gạo
+
+
+8. Lệnh nhập: Căn cứ vào hợp đồng mua đã ký, cục ban hành lệnh nhập kho cho từng chi cục, phòng KHQLDT nhập các thông tin vào lệnh nhập
+8.1: Khi thêm mới lệnh nhập chi tiết:
+	1. Quyết định kế hoạch lựa chọn nhà thầu: QD_DAUTHAU_MS, QD_DAUTHAU_DT(MA_VTHH, MA_DON_VI_NHAP)
+	2. Lấy thông tin từ kết quả đấu thầu: DAU_THAU_DETAIL với điều kiện: - TINH_TRANG_GOI_THAU = 7 (đã có kết quả)
+	3. Lấy thông tin từ kết quả đấu thầu: DAU_THAU_MASTER với điều kiện: có mã đơn vị MA_DON_VI_DAU_TU thuộc đơn vị người dùng hoặc đơn vị cấp con		
+	-------------------------------------------------------
+	4. Thay đổi: Trên cùng thêm option: PHƯƠNG THỨC ĐẤU THẦU | PHƯƠNG THỨC MUA TRỰC TIẾP
+	4.1 Khi chọn phương thức đấu thầu: thì chỉ căn cứ theo HỢP ĐỒNG
+	4.1 Khi chọn phương thức mua trực tiếp: thì có 2 option: CĂN CỨ THEO HỢP ĐỒNG || CĂN CỨ THEO QDKH MUA TRỰC TIẾP CỦA TỔNG CỤC (KHÔNG HIỂN THÌ LOẠI HÌNH NHẬP)
+	 - Loại bot: chỉ tiêu, kết quả đấu thầu, ẩn nhập tại kho
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//	<Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" />                                               //
+	//	<Property Name="ID" Type="number" Precision="38" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />              //
+    //                                                                                                                               //
+	//	<Property Name="ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />                                              //
+	//	<Property Name="ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />  //
+    //                                                                                                                               //
+	//	Replace                                                                                                                      //
+	//	Schema="VTHH_2016" thành Schema=""                                                                                           //
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+- lệnh nhập: thêm: trường quyết định điều chỉnh giá bên master, sửa: xóa phần phương thức hợp đồng, mua trực tiếp
+- Chỉ còn lại 2 option căn cứ gồm hợp đồng và không hợp đồng
+
+28/09/2016: Quyết định đối với vật tư thì cho nhiều gói. Trong mỗi gói thì không có phần thầu
+		  : Quyết định đối với gạo, muối thì chỉ có 1 gói thầu. trong mỗi gói thầu thì nhiều phần thầu
+		  - số QD phê duyệt kết quả muc trực tiếp
+03/10/2016: Thay đổi lệnh nhập: Có 3 option: 1. hợp đồng 2. Mua trực tiếp 3. Khác
+- Khi chọn khác ân 2 cái cắn cứ đi 
+
+04/10/2016: Thay option  Mua trực tiếp = QĐPDKQ mua trực tiếp, Thêm loại hình nhập xuất vào 2 option: hợp đồng, mua trực tiếp và hiển thị 2 
+option này là MUA, còn bên khác thì loại hình nhập xuất chỉ hiển thị tất cả trừ giá trị MUA
+
+1. thóc
+2. gạo
+3. vật tư
+4. muối
+5. nhóm hàng đảm bảo an ninh, an toàn người dân		
+
+---Vật tư hàng hóa trong một quyết định có thể nhiều gói. Mỗi gói không có phần thầu :
+Vì vậy khi thêm mới một số quyết định thì đầu tiên: kiểm tra sqđ đó. Nếu nó tồn tại và phê duyệt cho vật tư thì cho phép tên với số gói thầu mới
+Nếu số quyết định đó chưa tồn tại thì thêm thoải mái, kể cả lương thực, vật tư 
+- Chỉ có loại vật tư mới được trùng số QĐ
+
+-- Lệnh nhập: thêm kết quả mua trực tiếp
+-- Chức năng khác thì cho hiển thị: Căn cứ khác. còn đâu ẩn cái này đi
+-- Đổi lại tên đường dẫn, menu cho chuẩn
+
+--NHẬP--
+I. NHẬP GẠO, MUỐI
+1. 
+
+            var currentUser = ApiUtils.GetCurrentUser(Request);
+            obj.S_MA_DON_VI = currentUser.Ma_Don_Vi;
+			
+------------------------------------KHLCNT--------------------------------------------------------------------------------------------------			
+1.có 2 lựa chọn: lương thực, vật tư trên KHCLNT
+1.1 vật tư: ctkh năm: chỉ hiển thị số QD,
+1.1.1: Vật tư thì hiển thị thêm TRƯỜNG: DS_MA_DON_VI để lưu danh sách các đơn vị CỤC nhập gói thầu đó, lưu thêm DS_TEN_DON_VI để hiển thị 
+danh sách tên đơn vị cục đó
+
+1.2: lương thực giữ nguyên
+2. Đối với gói thầu cho vật tư thì cho phép phê duyệt cho nhiều CỤC: hiển thị danh sách gói thầu với nhiều cục thực hiện(nhom lại theo gói thầu)	
+Chọn phê duyệt cho nhiều cục giống như của anh bằng.
+
+2016/11/05: chú ý phần lệnh nhập: trường hợp QDPD kết quả mua TT thì có trường hợp KHÔNG CHÀO GIÁ -> không có kết quả mua trực tiếp
+Vì vậy sẽ căn cứ theo KẾ HOẠCH mua trực tiếp: nút check(ủy quyền chi cục ký hợp đồng) đây là trường hợp ủy quyền	
+
+2016/11/07: Chỉnh lại quyết định phê duyệt kế hoạch lựa chọn nhà thầu: trong mục danh sách quyết định nếu là vật tư thì hiển thị danh sách gói thầu
+vào phần master, và nếu chỉ có một gói thầu cho vật tư thì hiển thị danh sách phê duyệt cho đơn vị(còn nhiều gói thì thôi)
+
+QUYẾT ĐỊNH PHÊ DUYỆT KẾ HOẠCH LỰA CHỌN NHÀ THẦU
+- Phương thức, hình thức lựa chọn nhà thầu: lưu cả ID, TEN vào.
+- Đối với vật tư thì Phương Thức lựa chọn nhà thầu thì lưu vào detail. Còn bên ngoài ẩn
+
+2016/11/08: Lệnh nhập: khi chọn hợp đồng thì load ra chi cục thực hiện vì vậy chỉ load số lượng vật tư ra thôi. chứ ko load theo cấp số nhân
+đơn vị thực hiên và số lương thực hiện của vật tư đó <= hợp đồng trong tổng lệnh nhập
+
+--Lệnh nhập: Trường loại hình nhập xuất lưu giá trị như sau:
+	= 1: đấu thầu
+	= 2: Mua trực tiếp (load quyết định giá)
+	= 3: Khác
+	= 4: Ủy quyền
+	
+--Quyết định phê duyệt kế hoạch lựa chọn nhà thầu: Chuyển thời gian đóng thầu, hồ sơ đề xuất... vào trong phần detail của Vật Tư	
+--Quyết định phê duyệt kế hoạch lựa chọn nhà thầu: chỉ lấy ctkh năm của tổng cục
+--Quyết định phê duyệt kế hoạch lựa chọn nhà thầu: chọn ra ctkh năm bị lỗi vật tư
+
+--Ủy quyền: quyết định giá mới được chọn. Còn đâu tự load quyết định giá
+
+--Bắt theo quy trình của Thành QuiTrinh.Nhap để kiểm tra chức năng họ đã vào
+
+
+2016/11/10: Quyết định phê duyệt kế hoạch lựa chọn nhà thầu: chỉnh sửa lại thông khi thêm mới gói thầu thì cho phép phê duyệt cho nhiều cục
+- mỗi cục kèm luôn số lượng. Và lưu ra làm nhiều bản ghi trong database với cùng tên gói thầu là chung 
+- Cho phép xóa cho từng cục. Disable trường: Số lượng (*): và hiển thị tổng số lượng
+- Khi mở ra gói của từng cục thì chỉ cho phép sửa số lượng
+- Cho phép thêm mới bản ghi trong cùng TÊN GÓI
+- Chú ý: có thể lưu thêm trường tổng số lượng trong phần detail của mỗi bản ghi
+- Giữ nguyên trường DS_MA_DON_VI_NHAP, DS_TEN_DON_VI_NHAP và insert dữ liệu vào đó để ai đó có thể dùng
+--Trong trường hợp lương thực thì lưu cả NGUON_VON vào phần detail
+-Xem lại phần VAT của lương thực đang tính sai
+
+2016/11/12: LỆNH NHẬP: thêm phần giá tối đa vào phần detail, và khi chọn điều chỉnh giá thì lấy giá vào phần detail
+2016/11/14: Lệnh nhập: khi sửa một detail thì thông báo số lượng nhập ko được lớn hơn số lượng trong hợp đồng
+Lệnh nhập: load quyết định giá theo ỦY QUYỀN, lấy cái đơn giá load vào phần detail của Lệnh nhập
+
+
+Thêm bảng: QD_DAUTHAU_GOITHAU_DT bảng QD_DAUTHAU_DT vẫn lưu như cũ, ds_ma_don_vi_nhap như cũ SO_LUONG lưu tổng
+- QD_DAU_THAU_MS_ID
+- GOI_THAU_ID
+- MA_DON_VI_NHAP
+-SO_LUONG
+- DON_GIA
+
+--Kiem tra lai Lenh Nhap - Loai Quy Trinh thay đổi sai khi update
+-- Dau thau - ko co quyet dinh gia
+
+--20161122: quyết định phê duyệt kế hoạch lựa chọn nhà thầu
+Thêm option Phê duyệt cho: Gạo, Muối, Vật Tư để phân biệt ra
+- Nguồn Vốn chọn đi, chọn lại mất selected
+
+--Các bước check số lượng không được lớn hơn số lượng trong hợp đồng của chi cục
+1. Lưu giá trị tổng của hợp đồng TONG_HOPDONG
+2. Lưu giá trị tổng số lượng hiện tại của lệnh nhập TONG_LENHNHAP
+3. Khi thêm mới một chi tiết lệnh nhập SOLUONG (TONG_HOPDONG >= TONG_LENHNHAP + SOLUONG)
+4. Khi sửa một chi tiết lệnh nhập SOLUONG (TONG_HOPDONG >= TONG_LENHNHAP - so luong cũ + SOLUONG)
+
+--2016/11/25: lenh nhap: số lượng cho chi cục tối đa chỉ bằng hợp đồng, nhóm theo điểm kho thực hiện, lấy số lượng cụ thể
+đến tận điểm kho ở bên hợp đồng
+***Check kỹ số lượng còn lại trong hợp đồng thực hiện cho chi cục đó ****
+$scope.SoLuongThucHienChiCuc = ServiceLenhNX.Data.TongSoLuong;
+
+--Nhóm lại chi tiết lệnh nhập theo như của sáng.
+--Sửa bug Chinh gửi
+--cho cái phần tổng số lượng của hợp đồng cho chi cục lên phần master
+
+--Load số lượng ủy quyền khi đã thực hiện hợp đồng. phải trừ đi số lượng đó
+--Chú ý: check số lượng trong hợp đồng với cả trường hợp: chào giá, không chào giá.
+Lấy số lượng tổng kế hoạch mua trực tiếp - (chào giá + không chào giá) cho lệnh nhập
+
+--Chú ý: khi update Vat Tư khlcnt khi them mới gói thầu. Thì đang lỗi.
+ServiceQDDauThauMS.Data.QDDauThauDTId
+
+--Truy vấn lấy dữ liệu Lệnh Nhập Ngăn,Lô thì thêm điều kiện DANH_DAU_XOA = 1
+
+--Ngày 25/02/2017: Quyết định phê duyệt kế hoạch lựa chọn nhà thầu - VẬT TƯ: phần nhập Vật Tư thì khi chọn chỉ tiêu kế hoạch năm list danh sách vật tư thuộc
+chỉ tiêu kế hoạch năm đó, loại bỏ những vật tư khác trong danh sách chọn vật tư
+
+- Report Hải
+- Báo cáo cho Toàn
+
+- Kiểm tra SL hiện tại cho Điểm Kho với Đơn Giá đó đã dùng SL bao nhiêu
+
+
+//2017/03/13:
+ - Kiem tra lai trang thai cac nut edit, delete trong Lenh Nhap(ẩn khi đã sử dụng)
+ - Số lượng lệnh nhập
+ - Thời gian phần điều chỉnh khlcnt
+ 
+--2017/03/17: 
+- Lệnh nhập: khi chọn chi tiết đến các ngăn lô kho, nhà kho thì kiểm tra xem ngăn lô đó đã đầy chưa?
+Bằng cách kiểm tra bảng: KY_NHAP_XUAT 3 trường check đã đầy chưa? MA_DON_VI, NGAY_NHAP_DAY, NGAY_XUAT_DOC(=NULL)
+
+
+-- thêm mã phần thầu vào phần thầu: tự tăng
+-- Trong qdpdkhlcnt thi check theo tung don vi: truong hop vat tu. Check don vi nao thì tính số lượng tổng trong gói thầu
+
+--2017:03/25: Khi CTKH có điều chỉnh thì QDPDKHLCNT lấy theo CTKH nam điều chình mới nhất
+--Ngày 
+--Chú ý khi tìm kiếm danh sách chỉ tiêu nó bị biến mất, phân trang
+ 
+********2017/03/28: Số lượng trong phần Quyết Định Phê Duyệt kế hoạch lựa chọn nhà thầu = 
+Số lượng trong CTKH năm MỚI NHẤT (có thể là điều chỉnh) Trừ đi (-) Số lượng đã thực hiện trong các QDPDKHLCNT(cả điều chỉnh) trong QUYẾT ĐỊNH PHÊ DUYỆT KẾT QUẢ(đã thực hiện join với nhau)
+
+*****2017/03/30: Truong hợp điều chỉnh. Thì khi đã có kết quả đấu thầu thì ko được điều chỉnh nữa. 
+Và ko được xóa các quyết định Điều Chỉnh mà QĐ gốc nó đã có kết quả
+*** Chú ý phần lệnh nhập: thêm căn cứ khác trường hợp ủy quyền - danh sách các qdpdkh mua truc tiep lien quan giống bên thông tin đấu thầu
+
+**2017/04/03: Lệnh nhập giữ nguyên code cũ, vẫn load thằng mới nhất, trong danh sách QDPDKHMUATT hiển thị tất cả các quyết định ra(trước hiện quyết định gốc)
+- 2017/04/04: Quyết định phê duyệt kế hoạch mua trịc tiếp: không cho phép xóa những quyết định đã được sử dụng
+- Không cho phép xóa những quyết định đã được điều chỉnh,
+- Không được điều chỉnh trong các trường hợp đã có lệnh nhập, thông tin mua trực tiếp, hợp đồng
+
+*2017/04/10* Khi tạo điều chỉnh quyết định phê duyệt kế hoạch mua trực tiếp thì thời gian "Thời gian mở kho mua 
+từ ngày (*)", "Thời hạn mua thóc 
+hết ngày (*):" phải lớn hơn hoặc bằng ngày ký của quyết định gốc và ko nhất thiết lớn hơn ngày ký của quyết định điều chỉnh đó
+
+-- Lệnh nhập: Ủy quyền - Số QĐ PDKH mua TT: chỉ hiển thị số quyết định, không hiển thị chi cục, số lượng,
+- Hiển thị các quyết định liên quan cho phép chọn, Đơn vị nhập (*): chỉ hiển thị các chi cục mới nhất của quyết định mới nhất
+
+-- Quyết định phê duyệt kế hoạch mua trực tiếp: Update dữ liệu Thông Tin Mua Trực Tiếp khi điều chỉnh quyết định PDKHMUATT cờ = 1;
+Thêm mã phần
+--2017/04/18: Yêu cầu anh Văn: Lệnh nhập bắt ngày ký phải nằm trong khoảng Ngày Ký, Ngày Hiệu Lực của Hợp Đồng
+-- Thêm trường gợi ý số lượng trong phần chi tiết lệnh nhập vì khi chọn đơn giá thì số lượng mất
+--Load danh sách đơn vị theo điểm kho -> chỉ hiện danh sách đơn vị con thuộc điểm kho đó
+Mai làm nốt: GetTongHopMoiNhatTuHopDong. Trong hợp đồng hiện tại chưa lấy được ra số lượng
+--Trường hợp phụ lục thì cho phép đang ở điểm kho này có thể chọn sang điểm kho khác
+
+//Được load khi nào: Khi điều chỉnh, khi sửa
+//2017/04/21: Truong hợp lệnh nhập - ủy quyền: load quyết định giá sai
+//Dòng 3450 trường hợp điều chỉnh khi sửa bản ghi 
+//2017/04/22: Thêm một trường trạng thái của Lệnh Nhập để kiểm tra 
+
+//2017/04/24: Chưa load đơn giá - lệnh nhập - ủy quyền
+
+2017/04/24: Khi tạo một lệnh nhập - mua trực tiếp lấy thông tin từ Hợp Đồng với 2 đơn giá cho 2 điểm kho thì khi chọn 2 điểm kho khác nhau\
+nó sẽ gộp dữ liệu vào một điểm kho(Ngăn, lô không đúng điểm kho đã chọn) -> Số lượng check sai
+
+Lệnh nhập tìm kiếm Hợp đồng khác  trạng thái != 2
+
+2017/04/26
+--Hiểu theo ý mình hiểu: Lệnh nhập
+- Khi chọn danh sách phụ lục 01 đến 04 thì tổng hợp dữ liệu của các phụ lục.
+
+2017/04/28: Kiểm tra lại trường hợp khi update một Lệnh Nhập điều chỉnh. Hiện tại nó sẽ xóa hết nhưng thằng detail đi và add lại từ đầu.
+Vấn đề phát sinh là: những dữ liệu đằng sau sử dụng cái detail này(phiếu nhập kho) sẽ không khớp dữ liệu
+Vì vậy cần một chức năng thông báo hoặc không cho xóa nhưng trường hợp này
+
+
+********************2017/04/29*****************************************
+- Không hiểu sao số lượng lại check sai. Khi mà mấy đoạn ServiceLenhNX.Data.LenhNXDetail[i].MA_DON_VI.substr(0, 8) ko lấy được mã đơn vi = 8
+- Đó là trường hợp thêm mới lệnh nhập(Không phải điều chỉnh)
+---> Quan trọng nhớ xem lai
+
+******2017/05/03***********
+- Khi thêm một cái phụ lục về điều chỉnh giá thì phải lấy theo đơn giá mới nhất. Vì vậy chỉ cần check theo số lượng thôi.
+Nếu không thì vẫn check như bình thường
+
+---
+--Chú ý: Truyền danh sách đơn giá trong trường hợp có Phụ Lục về điều chỉnh đơn giá
+
+
+*******************************2017/05/04***********************************************
+- Lệnh Nhập: Chú ý trường hợp test dữ liệu Điều Chỉnh Lệnh Nhập: hiện tại chỉ test được với trường hợp tạo 
+Phụ Luc 01: Điều chỉnh số lượng
+Phụ Lục 02: Điều Chỉnh đơn giá
+Thì mới lấy được dữ liệu tổng hợp 
+--Hiện tại vẫn lấy nhầm dữ liệu
+**Chú ý*
+--Nếu Phụ Lục 01 Chỉ điều chỉnh Đơn Giá thì lấy số lượng còn lại trong Hợp Đồng(Chứ không phải Phụ Lục)
+********
+**************2017/05/05*******************
+- Lệnh Nhập: Nhớ lưu quyết định giá cho mỗi lần điều chỉnh Lệnh Nhập
+
+- Các trường hợp trong điều chỉnh Lệnh nhập:
++ Nếu Hợp Đồng vẫn còn về số lượng và có Phụ Lục điều chỉnh về đơn giá thì lấy số lượng đó gán với đơn giá trong phụ lục
++ Nếu Hợp Đồng vẫn còn về số lượng và có Phụ Lục điều chỉnh về đơn giá và số lượng thì lấy dữ liệu Số lượng + đơn giá trong phụ lục
++ Nếu Hợp Đồng vẫn còn về số lượng và có Phụ Lục điều chỉnh về số lượng thì lấy dữ liệu Số Lượng trong phụ lục đó để tính toán
+
+*******************************************************************2017/05/12*************************************************************************
+- Lệnh xuất: Điều chỉnh lệnh xuất - xuất trực tiếp
+****************************************************2017/05/16****************************************************************************************
+- Lệnh xuất: điều chỉnh lệnh xuất:
+- Lấy thông tin từ Hợp Đồng Bán, Phụ Lục
+- Nếu mà phụ lục chỉ điều chỉnh về đơn giá thì lấy số lượng của hợp đồng
+- Tổng hợp dữ liệu các phụ lục khi điều chỉnh lệnh nhập(lấy dữ liệu mới đè lên dữ liệu cũ)
+- Tính toán số lượng đã sử dụng, còn lại, tổng số lượng theo phụ lục liên quan
+- Chỉ lấy trong trường hợp Hợp Đồng - Chào giá
+- 
+
+****************************************************2017/05/18****************************************************************************************
+- Hiện tại khi chọn phụ lục liên quan chỉ có phụ lục điều chỉnh về giá thì chưa load được danh sách đơn vị thực hiện của hợp đồng.
+Vì khi điều chỉnh về giá nó không có đơn vị thực hiện
+- Dòng 1200 bị 
+
+1. LỆNH NHẬP
+2. BIÊN BẢN CHUẨN BỊ KHO(VAT TU), BIÊN BẢN NGHIỆM THU KÊ LÓT ĐỐI VỚI LƯƠNG THỰC
+3. PHIẾU KIỂM TRA CHẤT LƯỢNG HÀNG DTQG NHẬP Kho
+4. PHIẾU NHẬP KHO
+5. BIÊN BẢN KẾT THÚC NHẬP KHO
+6. BIÊN BẢN KIỂM NGHIỆM CHẤT LƯỢNG HÀNG DTQG NHẬP KHO
+
+********2017/06/23**************
+- Hiện tại cái Quyết Định Phê Duyệt Kế Hoạch Bán Trực Tiếp đang bị lấy sai dữ liệu so với chỉ tiêu. Phần detail,
+cả trường hợp edit phần detail vẫn chưa bắt
+
+
+***********2017/07/01*********************
+- Phụ lục hợp đồng Bán Trực Tiếp: Chưa tính được số lượng mà phiếu xuất kho đã sử dụng, để lấy sang đơn vị thực hiện
+- Phụ lục hợp đồng mua trực tiếp: Chưa lấy được đơn vị trong trường hợp chỉ điều chỉnh giá trong Tab Đơn vị thực hiện
+
+************2017/07/04******************************
+- Lệnh Nhập - Ủy Quyền: Khi điều chỉnh lệnh nhập này: thì số lượng = Lệnh Nhập gốc - Phiếu nhập kho
+
+************2017/07/05******************************
+- Quyết định phê duyệt kế hoạch lựa chọn nhà thầu: tiêu chuẩn chất lượng
+- Phụ lục - hợp đông: khi điều chỉnh thời gian chưa bắn đơn vị thực hiện -> lệnh nhập điều chỉnh lấy chưa đúng
+
+Pass: Server: abc123-+:
+User: Administrator
+
+- triển khai chú ý: xóa bảng TRANGTHAI_HT where DU_DAU = 0, đã có file excel backup. Chỉ việc xóa sạch và import lại file excel đó là được bảng TRANGTHAI_HT,
+nếu không được thì export ở cái Database kia rồi import lại là ok
+- Chú ý Tăng kích thước: 
+//alter table 
+//   QD_DAUTHAU_MS
+//modify 
+//( 
+//   TIEU_CHUAN_CHAT_LUONG nvarchar2(2000)
+//);
+
+admin
+d432161
+
+.
+
+
+user: hndsl_121116_161
+
+*******Một vài lệnh sử dụng trong Oracle********
+- Đăng nhập với quyền quản trị: sqlplus / as sysdba
+- Kiểm tra danh sách các Global Database: SELECT * FROM GLOBAL_NAME
+- Kiểm tra trạng thái của Listener Oracle: LSNRCTL status -> ok??
+- tnsping orcl; Xem global serve có hoạt động hay ko? ok? (đây là SID)
+- Xóa user, schema: DROP USER sidney CASCADE; 
+****************************Đào tạo: 2017/07/01: 
+- Phụ lục - hợp đồng - mua trực tiếp: có quyết định giá: khi thêm mới thì đơn giá ok(đơn giá mới), khu update thì lại load đơn giá cũ cho phụ lục
+- Lệnh nhập trường hợp ỦY QUYỀN: có trường hợp khi xem lệnh nhập Tổng số lượng cho chi cục, Tổng đã làm lệnh nhập, còn lại: tất cả đều bằng 0 
+- Trường hợp có hợp đồng mua - không chào giá, có thêm quyết định giá. Thì khi làm phụ lục -> thì không lấy được quyết định giá
+- Báo cáo tiến độ: chưa xem được theo options Theo quyết định đấu giá
+- Thi thoảng vẫn lỗi phiếu xuất về số lượng
+
+*****************Chú ý: 2017/07/26****************************
+- Trường hợp lệnh nhập - ủy quyền: khi xem lệnh nhập này thì số lượng hiển thị còn lại sai. Đã sửa các file 
+MuaTrucTiepMSHandler: dòng 1046(comment), dòng 1060(thêm dòng), dòng 600( thêm item.SO_LUONG = item.SO_LUONG_TEMP;)
+LenhNXMasterForm.js: dòng 667: thay bằng temp
+QDGiaNhapMSHandler.cs
+
+***********************2017/07/27*********************************
+1. Trong phiếu kiểm nghiệm chất lượng
+- Đối với Gạo, Thóc thì giữ nguyên cái form của nó, sẽ thêm mấy danh mục từ anh Văn(Mức xát, Màu sắc, Mùi, vị, Tạp chất) và lấy Cột Tiêu chuẩn làm kết quả luôn
+- Đối với Muối thì bỏ cột Tiêu Chuẩn đi cho phép nhập trực tiếp kết quả vào form cột (Kết quả kiểm tra)
+- 
+
+Membership: sys_user, sys_role, sys_permission,
+user_role -> Danh sách người dùng với các vai trò, quan hệ nhiều nhiều user,role
+role_per -> Quan hệ nhiều nhiều role, per
+
+- 2017/08/22- Kiểm tra lại lệnh nhập thao tác cho tiện, dữ liệu khi thêm mới, sửa ko reset số lượng về 0 nữa
+	- Trong phụ lục hợp đồng: trường hợp chào giá: thì tự động lấy Số QĐ Phê duyệt Kết Quả MTT(*), sau đó cho chọn quyết định giá nếu có
+- 2017/08/26: Gia hạn lệnh: copy lệnh mới, chỉ thay đổi thời gian. và không có phụ lục hợp đồng liên quan. Chỉ căn cứ hợp đồng
+	- Đang: Đang làm dở nước sản xuất cho hợp đồng bán, lệnh xuất
+	
+- 2017/08/31: Vẫn chưa có định hướng cho tương lai
+-2017/09/01: Hiện tại không dùng gia hạn nữa, mà cho vào điều chỉnh, cho phép chỉnh ngày ký, thay đổi địa điểm nhập kho trong lệnh nhập, xuất
+Trong lệnh xuất: cái nước sản xuất đã lấy từ hợp đồng thì disable cái trường đó đi. chỉ hiển thị thôi. ko cho phép sửa
+Phần Phụ lục hợp đồng -> Bán trực tiếp: trong hợp đồng có 2 đơn vị cùng điểm kho nhưng khác đơn giá, khi có quyết định giá vào phần phụ lực thì
+đơn giá đó lại áp dụng cho một đơn vị. còn đơn vị kia lại giá cũ
+
+- 2017/09/25: Còn trường hợp khi updat phụ lục nữa. mới cho phép lưu vào database
+
+- 2017/09/27: Event & delegate: Delegate như một con trỏ hàm. Nó tham chiếu đến tất cả các hàm có cùng số lượng tham số và kiểu tham số
+- Nó như một hàm chung chung. Cho phép gán các function khác trỏ tới nó và sử dụng. Mà ko động đến têm hàm. Chỉ dùng delegate
+-Lambda Expression: Là cách gọi một hàm ẩn danh, kết hợp với delegate để Func để gán một hàm tới Func<T, result> trả về kiểu result với T truyền vào
+s=>s.ID = 10
