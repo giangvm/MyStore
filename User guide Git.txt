@@ -1,0 +1,16 @@
+I. Các lệnh thường dùng với Git, GitHub
+1. Git Bash Here: Vào thư mục local chọn để mở ra cửa sổ CMD
+2. $ git init: Tạo Repository cho thư mục local
+3. $ git remote add origin https://github.com/user-name/repository-name.git : Kết nối từ Local to Remote Repository
+4. $ git add file.txt : add file.txt vào vùng STAGING AREA (vùng sẵn sàng để commit) có thể dùng $ git add * để add toàn bộ file
+5. $ git status: Kiểm tra trạng thái các file
+6. $ git commit -m “message” : Commit file, code lên Remote Repository(Chụp lại các file snapshot ở staging area và commit)
+7. $ git commit -a -m “message”: Để commit file vừa sửa
+8. $ git reset HEAD tên-file: Đưa một file ra khỏi STAGING AREA
+9. $ rm file_name: để xóa file (vẫn còn trong ổ cứng)
+10. $ rm -f file_name: Xóa hẳn file 
+11. $ git log: Xem lại lịch sử các lần commit
+12. $ git push -u origin master: Đẩy dữ liệu lên GitHub Remote Repository (đây mới chính là commit thực sự) Lần sau chỉ việc gõ $ git push, Vì nó đã lưu thông số
+13. $ git pull: Update file mới nhất về
+II. Các từ khóa
+Brand master: Khi tạo Repository thì sẽ có một brand chính là Master, sẽ có nhiều brand phụ và có thể merger và brand chính Master 
