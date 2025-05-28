@@ -1,0 +1,737 @@
+﻿{
+  "translations": [
+    {
+      "translationId": "e94e53c5-9764-4a69-9a60-bee21c8d9b17",
+      "sourceString": "{22}Current page{23} - prints the current page in the PDF.",
+      "translatedString": "{22}Page active{23} : imprime la page active dans le fichier PDF.",
+      "sourceLocale": "en-US",
+      "targetLocale": "FR-FR",
+      "context": [
+        {
+          "product": "acrobat"
+        },
+        {
+          "domain": "Documentation"
+        }
+      ],
+      "terms": [
+        {
+          "type": "DNT",
+          "source": "page",
+          "target": "page"
+        },
+        {
+          "type": "DNT",
+          "source": "PDF",
+          "target": "PDF"
+        }
+      ],
+      "failureReasons": [
+        "Hallucination",
+        "Mistranslation",
+        "Grammar and Syntax Error",
+        "Spelling or Formatting Mistake",
+        "Incorrect tone"
+      ],
+      "approved": "false"
+    },
+    {
+      "translationId": "e94e53c5-9764-4a69-9a60-bee21c8d9c17",
+      "sourceString": "{22}Current page{23} - prints the current page in the PDF.",
+      "translatedString": "{22}Page active{23} : imprime la page active dans le fichier PDF.",
+      "sourceLocale": "en-US",
+      "targetLocale": "FR-FR",
+      "context": [
+        {
+          "product": "acrobat"
+        },
+        {
+          "domain": "Documentation"
+        }
+      ],
+      "terms": [
+        {
+          "type": "DNT",
+          "source": "page",
+          "target": "page"
+        },
+        {
+          "type": "DNT",
+          "source": "PDF",
+          "target": "PDF"
+        }
+      ],
+      "failureReasons": [
+        "Hallucination",
+        "Mistranslation",
+        "Grammar and Syntax Error",
+        "Spelling or Formatting Mistake",
+        "Incorrect tone"
+      ],
+      "approved": "false"
+    },
+    {
+      "translationId": "c58f1820-4ee0-447d-901a-61844aea0e81",
+      "sourceString": "Give everyone on your team the flexibility to make impactful, on-brand documents with effortless text control and customizable templates that make design layout and formatting a breeze.{5}",
+      "translatedString": "Donnez à tous les membres de votre équipe la souplesse nécessaire pour créer des documents efficaces et de marque grâce à un contrôle textuel simple et à des modèles personnalisables qui rendent la mise en page et la mise en forme aisées.{5}",
+      "sourceLocale": "en-US",
+      "targetLocale": "FR-FR",
+      "context": [
+        {
+          "product": "Spark"
+        },
+        {
+          "domain": "Documentation"
+        }
+      ],
+      "terms": [
+        {
+          "type": "Core",
+          "source": "brand",
+          "target": "marque"
+        },
+        {
+          "type": "Core",
+          "source": "Team",
+          "target": "Équipe"
+        },
+        {
+          "type": "Core",
+          "source": "Layout",
+          "target": "Disposition"
+        },
+        {
+          "type": "Core",
+          "source": "template",
+          "target": "modèle"
+        },
+        {
+          "type": "Core",
+          "source": "Design",
+          "target": "Conception"
+        }
+      ],
+      "approved": "true"
+    },
+    {
+      "translationId": "c526411f-1f11-4461-8a54-acd3f94c761c",
+      "sourceString": "Add scenes and transitions to a video timeline",
+      "translatedString": "Ajout de scènes et de transitions à une chronologie vidéo",
+      "sourceLocale": "en-US",
+      "targetLocale": "FR-FR",
+      "context": [
+        {
+          "product": "Spark"
+        },
+        {
+          "domain": "Documentation"
+        }
+      ],
+      "terms": [
+        {
+          "type": "Core",
+          "source": "scene",
+          "target": "scène"
+        },
+        {
+          "type": "Core",
+          "source": "Video",
+          "target": "Vidéo"
+        },
+        {
+          "type": "Core",
+          "source": "timeline",
+          "target": "journal"
+        },
+        {
+          "type": "Core",
+          "source": "timeline",
+          "target": "montage"
+        },
+        {
+          "type": "Core",
+          "source": "timeline",
+          "target": "chronologie"
+        }
+      ],
+      "approved": "true"
+    },
+    {
+      "translationId": "6a9f7f95-7e30-486c-adbc-ccadd82b1f66",
+      "sourceString": "Use the Layers icon to open and close the Layer panel.",
+      "translatedString": "Utilisez l’icône Effets pour ouvrir et fermer le panneau Effets.",
+      "sourceLocale": "en-US",
+      "targetLocale": "FR-FR",
+      "context": [
+        {
+          "product": "Spark"
+        },
+        {
+          "domain": "Documentation"
+        }
+      ],
+      "terms": [
+        {
+          "type": "Core",
+          "source": "panel",
+          "target": "panneau"
+        }
+      ],
+      "approved": "true"
+    },
+    {
+      "translationId": "bf2fbb30-df4b-4449-93c0-f7b153e0662e",
+      "sourceString": "When using the feature, avoid using the incognito mode to prevent slow speed.",
+      "translatedString": "Lorsque vous utilisez la fonctionnalité, évitez d’utiliser le mode Incognito pour éviter de ralentir la vitesse.",
+      "sourceLocale": "en-US",
+      "targetLocale": "FR-FR",
+      "context": [
+        {
+          "product": "Spark"
+        },
+        {
+          "domain": "Documentation"
+        }
+      ],
+      "terms": [],
+      "approved": "true"
+    },
+    {
+      "translationId": "f4e850f4-c5d7-4496-9b42-f06706350a5e",
+      "sourceString": "When the reference image is successfully uploaded, a blue tick appears beside the icon {32} {33}, and its thumbnail can be viewed in the {34}Properties{35} panel. ",
+      "translatedString": "Lorsque l’image de référence est téléchargée avec succès, un point bleu apparaît en regard de l’icône {32} {33}, et sa vignette peut être affichée dans le panneau {34}Propriétés{35}. ",
+      "sourceLocale": "en-US",
+      "targetLocale": "FR-FR",
+      "context": [
+        {
+          "product": "photoshop"
+        },
+        {
+          "domain": "Documentation"
+        }
+      ],
+      "terms": [
+        {
+          "type": "Core",
+          "source": "upload",
+          "target": "charger"
+        },
+        {
+          "type": "Core",
+          "source": "panel",
+          "target": "panneau"
+        },
+        {
+          "type": "Core",
+          "source": "view",
+          "target": "Affichage"
+        },
+        {
+          "type": "Core",
+          "source": "thumbnail",
+          "target": "vignette"
+        },
+        {
+          "type": "Core",
+          "source": "thumbnail",
+          "target": "miniature"
+        },
+        {
+          "type": "Core",
+          "source": "Reference Image",
+          "target": "Image de référence"
+        }
+      ],
+      "approved": "true"
+    },
+    {
+      "translationId": "5eb853b2-55ab-40ac-a07f-cc7afd8287b7",
+      "sourceString": "Photoshop and Illustrator files in Adobe Express overview",
+      "translatedString": "Aperçu des fichiers Photoshop et Illustrator dans Adobe Express",
+      "sourceLocale": "en-US",
+      "targetLocale": "FR-FR",
+      "context": [
+        {
+          "product": "Spark"
+        },
+        {
+          "domain": "Documentation"
+        }
+      ],
+      "terms": [
+        {
+          "type": "DNT",
+          "source": "Adobe Photoshop",
+          "target": "Adobe Photoshop"
+        },
+        {
+          "type": "DNT",
+          "source": "Photoshop",
+          "target": "Photoshop"
+        },
+        {
+          "type": "Core",
+          "source": "files",
+          "target": "fichiers"
+        },
+        {
+          "type": "DNT",
+          "source": "Adobe Illustrator",
+          "target": "Adobe Illustrator"
+        },
+        {
+          "type": "DNT",
+          "source": "Illustrator",
+          "target": "Illustrator"
+        },
+        {
+          "type": "DNT",
+          "source": "Adobe Express",
+          "target": "Adobe Express"
+        }
+      ],
+      "approved": "true"
+    },
+    {
+      "translationId": "03824c51-5b4d-422f-b759-1f913c8ea792",
+      "sourceString": "{33}In Windows{34}, the {35}Acrobat\nPDFMaker{36} in Outlook and {37}Lotus Notes{38} can\ncreate {39}PDF Portfolios{40} when you convert email\nmessages.",
+      "translatedString": "{33}Sous Windows{34}, {35}Acrobat PDFMaker{36} dans Outlook et {37}Lotus Notes{38} permet de créer des {39}porte-documents PDF{40} lors de la conversion des messages électroniques.",
+      "sourceLocale": "en-US",
+      "targetLocale": "FR-FR",
+      "context": [
+        {
+          "product": "acrobat"
+        },
+        {
+          "domain": "Documentation"
+        }
+      ],
+      "terms": [
+        {
+          "type": "Core",
+          "source": "email",
+          "target": "e-mail"
+        },
+        {
+          "type": "DNT",
+          "source": "PDF",
+          "target": "PDF"
+        },
+        {
+          "type": "Core",
+          "source": "convert",
+          "target": "convertir"
+        },
+        {
+          "type": "DNT",
+          "source": "Acrobat",
+          "target": "Acrobat"
+        },
+        {
+          "type": "DNT",
+          "source": "portfolio",
+          "target": "portfolio"
+        },
+        {
+          "type": "DNT",
+          "source": "Adobe Portfolio",
+          "target": "Adobe Portfolio"
+        },
+        {
+          "type": "DNT",
+          "source": "Portfolio",
+          "target": "Portfolio"
+        },
+        {
+          "type": "Core",
+          "source": "create",
+          "target": "créer"
+        }
+      ],
+      "approved": "true"
+    },
+    {
+      "translationId": "ae91a38f-36b9-4c4d-8fc6-4c824cf1f864",
+      "sourceString": "Crop videos12",
+      "translatedString": "Recadrer les vidéos",
+      "sourceLocale": "en-US",
+      "targetLocale": "FR-FR",
+      "context": [
+        {
+          "product": "Spark"
+        },
+        {
+          "domain": "Documentation"
+        }
+      ],
+      "terms": [
+        {
+          "type": "Core",
+          "source": "Video",
+          "target": "Vidéo"
+        },
+        {
+          "type": "Core",
+          "source": "crop",
+          "target": "Recadrer"
+        }
+      ],
+      "approved": "true"
+    },
+    {
+      "translationId": "1ef204df-d54e-458f-b0f4-d73a148f6d35",
+      "sourceString": "Crop videos",
+      "translatedString": "Recadrer les vidéos",
+      "sourceLocale": "en-US",
+      "targetLocale": "FR-FR",
+      "context": [
+        {
+          "product": "Spark"
+        },
+        {
+          "domain": "Documentation"
+        }
+      ],
+      "terms": [
+        {
+          "type": "Core",
+          "source": "Video",
+          "target": "Vidéo"
+        },
+        {
+          "type": "Core",
+          "source": "crop",
+          "target": "Recadrer"
+        }
+      ],
+      "approved": "true"
+    },
+    {
+      "translationId": "1ef204df-d54e-458f-b0f4-d73a148f6d39",
+      "sourceString": "Crop videos",
+      "translatedString": "Recadrer les vidéos",
+      "sourceLocale": "en-US",
+      "targetLocale": "FR-FR",
+      "context": [
+        {
+          "product": "Spark"
+        },
+        {
+          "domain": "Documentation"
+        }
+      ],
+      "terms": [
+        {
+          "type": "Core",
+          "source": "Video",
+          "target": "Vidéo"
+        },
+        {
+          "type": "Core",
+          "source": "crop",
+          "target": "Recadrer"
+        }
+      ],
+      "approved": "true"
+    },
+    {
+      "translationId": "cf69c271-1c05-498a-8c14-2e1f8605f592",
+      "sourceString": "Seek independent legal counsel if unsure whether your input or output violates somebody else's rights.{78}",
+      "translatedString": "Si vous ne savez pas si votre entrée ou votre sortie viole les droits d’autrui, demandez conseil juridique indépendant.{78}",
+      "sourceLocale": "en-US",
+      "targetLocale": "FR-FR",
+      "context": [
+        {
+          "product": "Spark"
+        },
+        {
+          "domain": "Documentation"
+        }
+      ],
+      "terms": [
+        {
+          "type": "Core",
+          "source": "legal counsel",
+          "target": "conseiller juridique"
+        }
+      ],
+      "approved": "true"
+    },
+    {
+      "translationId": "72b09e47-1f89-4e6a-babc-f826ebaab547",
+      "sourceString": "Learn how to add new scenes to a video timeline.",
+      "translatedString": "Découvrez comment ajouter de nouvelles scènes à une chronologie vidéo.",
+      "sourceLocale": "en-US",
+      "targetLocale": "FR-FR",
+      "context": [
+        {
+          "product": "Spark"
+        },
+        {
+          "domain": "Documentation"
+        }
+      ],
+      "terms": [
+        {
+          "type": "Core",
+          "source": "scene",
+          "target": "scène"
+        },
+        {
+          "type": "Core",
+          "source": "Video",
+          "target": "Vidéo"
+        },
+        {
+          "type": "Core",
+          "source": "timeline",
+          "target": "journal"
+        },
+        {
+          "type": "Core",
+          "source": "timeline",
+          "target": "montage"
+        },
+        {
+          "type": "Core",
+          "source": "timeline",
+          "target": "chronologie"
+        }
+      ],
+      "approved": "true"
+    },
+    {
+      "translationId": "136a4f85-1a9c-45cf-824a-15da447040f5",
+      "sourceString": "The design elements are animated in your design.",
+      "translatedString": "Les éléments de votre design sont animés.",
+      "sourceLocale": "en-US",
+      "targetLocale": "FR-FR",
+      "context": [
+        {
+          "product": "Spark"
+        },
+        {
+          "domain": "Documentation"
+        }
+      ],
+      "terms": [
+        {
+          "type": "DNT",
+          "source": "Adobe Animate",
+          "target": "Adobe Animate"
+        },
+        {
+          "type": "DNT",
+          "source": "Animate",
+          "target": "Animate"
+        },
+        {
+          "type": "Core",
+          "source": "Design",
+          "target": "Conception"
+        }
+      ],
+      "approved": "true"
+    },
+    {
+      "translationId": "3afb95dc-10af-487d-bfc3-7221ea394c58",
+      "sourceString": "The left panel displays styling options for Tint, Style, and more, along with the generated result. ",
+      "translatedString": "Le panneau de gauche affiche les options de style pour la vignette, le style, etc., ainsi que le résultat généré. ",
+      "sourceLocale": "en-US",
+      "targetLocale": "FR-FR",
+      "context": [
+        {
+          "product": "Spark"
+        },
+        {
+          "domain": "Documentation"
+        }
+      ],
+      "terms": [
+        {
+          "type": "DNT",
+          "source": "OPTIONS",
+          "target": "OPTIONS"
+        },
+        {
+          "type": "Core",
+          "source": "panel",
+          "target": "panneau"
+        },
+        {
+          "type": "Core",
+          "source": "generate",
+          "target": "générer"
+        },
+        {
+          "type": "DNT",
+          "source": "Tint",
+          "target": "Tint"
+        }
+      ],
+      "approved": "true"
+    },
+    {
+      "translationId": "01a7c1f7-64ea-4149-9520-65c2b667b579",
+      "sourceString": "In the {9}Remove object{10} section, set your desired brush size using the {11}Brush size{12} slider, then mark an area in the image with the brush and select {13}Remove{14}.",
+      "translatedString": "Dans la section {9}Supprimer l’objet{10}, définissez la taille souhaitée du pinceau à l’aide du curseur {11}Taille du pinceau{12}, marquez ensuite une zone de l’image avec le pinceau et sélectionnez {13}Supprimer{14}.",
+      "sourceLocale": "en-US",
+      "targetLocale": "FR-FR",
+      "context": [
+        {
+          "product": "Spark"
+        },
+        {
+          "domain": "Documentation"
+        }
+      ],
+      "terms": [
+        {
+          "type": "Core",
+          "source": "slider",
+          "target": "curseur"
+        },
+        {
+          "type": "Core",
+          "source": "brush",
+          "target": "pinceau"
+        },
+        {
+          "type": "DNT",
+          "source": "Image",
+          "target": "Image"
+        },
+        {
+          "type": "Core",
+          "source": "select",
+          "target": "Sélectionner"
+        },
+        {
+          "type": "Core",
+          "source": "brush size",
+          "target": "Epaisseur du pinceau"
+        }
+      ],
+      "approved": "true"
+    },
+    {
+      "translationId": "ae544e32-c9e6-4471-98ab-112a16fe36a9",
+      "sourceString": "Use the text effects panel to customize your text effect and to view the generated results.",
+      "translatedString": "Utilisez le panneau Effets de texte pour personnaliser votre effet de texte et pour afficher les résultats générés.",
+      "sourceLocale": "en-US",
+      "targetLocale": "FR-FR",
+      "context": [
+        {
+          "product": "Spark"
+        },
+        {
+          "domain": "Documentation"
+        }
+      ],
+      "terms": [
+        {
+          "type": "Core",
+          "source": "panel",
+          "target": "panneau"
+        },
+        {
+          "type": "Core",
+          "source": "view",
+          "target": "Affichage"
+        },
+        {
+          "type": "Core",
+          "source": "generate",
+          "target": "générer"
+        },
+        {
+          "type": "Core",
+          "source": "effect",
+          "target": "effet"
+        },
+        {
+          "type": "Core",
+          "source": "text effects",
+          "target": "effets de texte"
+        }
+      ],
+      "approved": "true"
+    },
+    {
+      "translationId": "81a34fd2-37ee-4391-9e2d-fd3896d88b29",
+      "sourceString": "{209}Adobe Express for Education overview{210}",
+      "translatedString": "{209}Aperçu d’Adobe Express pour le secteur de l’éducation{210}",
+      "sourceLocale": "en-US",
+      "targetLocale": "FR-FR",
+      "context": [
+        {
+          "product": "Spark"
+        },
+        {
+          "domain": "Documentation"
+        }
+      ],
+      "terms": [
+        {
+          "type": "DNT",
+          "source": "Adobe Express",
+          "target": "Adobe Express"
+        }
+      ],
+      "approved": "true"
+    },
+    {
+      "translationId": "6673969a-9aa9-41f9-ad27-e24abb1cce0f",
+      "sourceString": "Replace your background with generated content that matches the lighting, shadows and perspective of the subject in just a few steps with {25}Generate Background{26}.{27}",
+      "translatedString": "Remplacez votre arrière-plan par un contenu généré qui correspond à l’éclairage, aux ombres et à la perspective du sujet en quelques étapes avec {25}générer un arrière-plan{26}.{27}",
+      "sourceLocale": "en-US",
+      "targetLocale": "FR-FR",
+      "context": [
+        {
+          "product": "photoshop"
+        },
+        {
+          "domain": "Documentation"
+        }
+      ],
+      "terms": [
+        {
+          "type": "DNT",
+          "source": "perspective",
+          "target": "perspective"
+        },
+        {
+          "type": "Core",
+          "source": "generate",
+          "target": "générer"
+        },
+        {
+          "type": "Core",
+          "source": "content",
+          "target": "contenu"
+        },
+        {
+          "type": "Core",
+          "source": "Shadow",
+          "target": "Ombre"
+        },
+        {
+          "type": "Core",
+          "source": "Subject",
+          "target": "Objet"
+        },
+        {
+          "type": "Core",
+          "source": "background",
+          "target": "Arrière-plan"
+        },
+        {
+          "type": "Core",
+          "source": "generate background",
+          "target": "Générer l’arrière-plan"
+        }
+      ],
+      "approved": "true"
+    }
+  ]
+}
