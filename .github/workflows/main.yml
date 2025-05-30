@@ -1,0 +1,16 @@
+name: Download Files
+on:
+  workflow_dispatch:
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Archive files
+        run: zip -r repo_files.zip .
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: repo_files
+          path: repo_files.zip
